@@ -118,7 +118,7 @@ Uniswap 使用\textbf{恒定积自动做市商}（Constant-Product Automatic Mar
     \begin{tikzpicture}
         \draw[-latex] (0,0) -- (4,0) node[right] {$x$};
         \draw[-latex] (0,0) -- (0,4) node[above] {$y$};
-        
+        \draw[domain=0.52:3.75, thick] plot (\x, {2/\x});
     \end{tikzpicture}
     \caption{添加流动性后的可乐交易所}
 \end{figure}

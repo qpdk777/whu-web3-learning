@@ -1,6 +1,8 @@
 \documentclass[12pt, a4paper, oneside]{ctexart}
 \usepackage{graphicx}
 \usepackage{tikz}
+\usepackage{amsmath}
+\usetikzlibrary{angles,quotes}
 
 \title{Uniswap简明导论}
 \author{怀菁}
@@ -62,7 +64,7 @@ Uniswap 是一个不断发展的交易协议。在 Uniswap V2 中，任意交易
         \draw[domain=0:1, thick, red] plot (\x, {-\x*3+3});
         \node[left] at (0,3) {$k$};
     \end{tikzpicture}
-    \caption{可乐交易所}
+    \caption{可乐交易所储备图}
 \end{figure}
 
 然而，我们可能会遇到这样的窘境：我们一次性想要买的可乐太多了，机器里的可乐根本不够；或者我们一次性想要卖的可乐太多了，机器里的钱根本不够。这其实就是流动性问题。
@@ -101,11 +103,11 @@ Uniswap 是一个不断发展的交易协议。在 Uniswap V2 中，任意交易
 
 可口可乐交易所的例子非常简明，但是它的弊端十分明显——可乐的价格是不能变化的。在真正的金融市场上，资产价格应当随着供求关系的变化产生波动。
 
-我们假设武汉大学发行了一种代码为 WHU 的加密货币，并将其与比特币 BTC 一起建立了一个\textbf{交易对}（Pair），记作 WHU/BTC ，使得任何人都可以使用一种资产交易另一种资产。在这里，我们称 WHU 为\textbf{基准货币}（Base Currency），称 BTC 为\textbf{计价货币}（Quote Currency）。
+我们假设有人用货币 X 和货币 Y 一起建立了一个\textbf{交易对}（Pair），记作 X/Y ，使得任何人都可以使用一种资产交易另一种资产。在这里，我们称 X 为\textbf{基准货币}（Base Currency），称 Y 为\textbf{计价货币}（Quote Currency）。
 
-Uniswap 为两种资产建立起一个\textbf{流动性池}（Liquidity Pool），其中储备有若干 WHU 和 BTC。设 WHU 的储备数量为 $x$ ，BTC 的储备数量为 $y$ ，这两个量是变量。
+Uniswap 为两种资产建立起一个\textbf{流动性池}（Liquidity Pool），其中储备有若干 X 和 Y。设 X 的储备数量为 $x$ ，Y 的储备数量为 $y$ ，这两个量是变量。
 
-Uniswap 使用\textbf{恒定积自动做市商}（Constant-Product Automatic Market Maker, CPAMM）实现可变的价格。设建立流动性池的人向池中加入 $x_0$ 个 WHU 和 $y_0$ 个 BTC ，设其乘积为 $k=x_0y_0$ 。如果不添加或提取流动性，自动做市商控制恒定积公式
+Uniswap 使用\textbf{恒定积自动做市商}（Constant-Product Automatic Market Maker, CPAMM）实现可变的价格。设建立流动性池的人向池中加入 $x_0$ 个 X 和 $y_0$ 个 Y ，设其乘积为 $k=x_0y_0$ 。如果不添加或提取流动性，自动做市商控制恒定积公式
 
 \begin{equation}
     xy=k 
@@ -113,15 +115,170 @@ Uniswap 使用\textbf{恒定积自动做市商}（Constant-Product Automatic Mar
 
 恒成立，也就是说 $x$ 与 $y$ 的变化始终成反比例关系，保持其乘积是定值。
 
+$x$ 与 $y$ 相对数量的变化反映了价格（汇率）的变化，而 $xy$ 的变化反映了流动性大小的变化。我们将在下面的一节中详细介绍。
+
+\section{CPAMM的经济原理}
+
+\subsection{价格与储备量的关系}
+
+首先需要声明的是，在笔者看来，价格与汇率并无本质区别。通俗意义上说，价格是一种特殊的汇率，是以法币或稳定币作为计价货币的汇率。生活在传统金融和 Web2 中的人们更倾向于使用美元、人民币、USDT等来作为通用的计价货币，因为这些货币往往有权威背书，购买力相对稳定。这样固然会让讨论问题变得更加方便，但其实也会导致我们束手束脚。
+
+在 Defi 中，我更希望抛弃这样一个垄断了标价权的货币，允许用各种货币作为计价货币。这样，汇率与价格便统一起来。两种货币的汇率，就是以其中一种货币为单位而表示的另一种货币的价格。
+
+在 CPAMM 中，\textbf{基准货币的价格就是两种货币储备量之商的倒数}。体现在储备图上，价格就是储备线上某点与原点连线的斜率。
+
+结合图4，我们可以用数学语言表示，在状态 A 下
+
+$$
+p_X = \frac{y_1}{x_1} = \tan \theta
+$$
+
 \begin{figure}[htbp]
     \centering
     \begin{tikzpicture}
         \draw[-latex] (0,0) -- (4,0) node[right] {$x$};
         \draw[-latex] (0,0) -- (0,4) node[above] {$y$};
-        \draw[domain=0.52:3.75, thick] plot (\x, {2/\x});
+        \draw[domain=0.52:3.75, thick, red] plot (\x, {2/\x});
+
+        \fill ({sqrt(2)},{sqrt(2)}) circle (2pt);
+        \node[above right] at ({sqrt(2)},{sqrt(2)}) {$A$};
+
+        \coordinate (A) at ({sqrt(2)},{sqrt(2)});
+        \coordinate (O) at (0,0);
+        \coordinate (B) at ({sqrt(2)},0);
+        \coordinate (C) at (0,{sqrt(2)});
+        \draw (A) -- (O);
+        \pic [draw, pic text=$\theta$, angle eccentricity=1.5] {angle = B--O--A};
+
+        \draw[dashed] (A) -- (B);
+        \draw[dashed] (A) -- (C);
+        \node[below] at (B) {$x_1$};
+        \node[left] at (C) {$y_1$};
+
+        \node at (1.5,3.5) {$\displaystyle y=\frac{k}{x}$};
     \end{tikzpicture}
-    \caption{添加流动性后的可乐交易所}
+    \caption{X/Y交易对储备图}
 \end{figure}
+
+很显然，如此得到的价格的值域是 $(0,+\infty)$ ，符合实际情况。
+
+读者很可能产生一个疑问：为什么以 Y 为单位 X 的价格能够被表达为 $\displaystyle \frac{y_1}{x_1}$ ？这就是 Defi 的精妙之处。对此，我有两种方式做出解答。
+
+第一种解释是将流动性池看做整个市场的缩影。也就是说，在整个市场上流通着的 X 和 Y 数量之比，就等于流动性池中的 X 与 Y 数量之比。虽然他们数量的绝对大小不同，但比值是相等的。如果人们更加认可 X 的价值，将 X 贮藏起来而不花出去，那么就会使得流通中的 X 数量减少，其价格也就会升高。对于 Y 而言，这条规则同样适用。如果我们认为货币都是平等的，那么数量之商（无论是局部的还是整体的）就是表现人们对货币价值评价的最佳变量。
+
+第二种解释是，CPAMM 能够比较完美地履行以 $\displaystyle \frac{y_1}{x_1}$ 为价格进行交易的职能。我们将在下一节中详细了解这一机制。
+
+有些人认为， CPAMM 的运行完全是依赖于人们的共识、依赖于套利者才能够与其他中心化交易所的价格相锚定。这种观点是片面的。不可否认，套利对于维护去中心化交易所的正常报价至关重要，但这种解释其实是否定了 CPAMM 本身的内在价值，认为 Defi 只不过是完全依附于传统金融的赌场。如果我们继续深入理解 CPAMM ，便会明白，它的价值不是来源于一群信徒的幻想，而是来源于其自身的经济规律。
+
+\subsection{改变价格}
+
+现在激动人心的时刻来了。我们即将见证， CPAMM 究竟是如何在以特定价格完成交易的同时引起价格变化从而反映供求关系的。
+
+我们假设初始状态下流动性池中有 $x_0$ 个货币 X 和 $y_0$ 个货币 Y 。某个交易者准备用 $\Delta x$ 个货币 X 购买一些货币 Y。流动性池收到了这 $\Delta x$ 个货币 X，现在总共有 $x'=x_0+\Delta x$ 个货币 X。为了满足恒定积公式恒成立，新的 Y 储备量 $y'$ 应该满足
+
+\begin{equation}
+    x'y'=k
+\end{equation}
+
+解得
+
+\begin{equation}
+    y'=\frac{k}{x'}=\frac{k}{x_0+\Delta x}
+\end{equation}
+
+显然有 $y' < y_0$ 。实际上，交易所会将一笔数量为
+
+\begin{equation}
+    \Delta y = y_0 - y' = y_0 - \frac{k}{x_0+\Delta x}
+\end{equation}
+
+的货币 Y 发送给交易者。这样，一笔交易就完成了。
+
+首先，让我们从交易者的角度来研究，他的这笔交易是否合他的心意。交易者卖掉了 $\Delta x$ 个货币 X ，买来了 $\Delta y$ 个货币 Y 。如果初状态下价格 $\displaystyle p_X = \frac{y_0}{x_0}$ ，这笔买卖是不是按照价格进行的呢？通过下面的计算我们可以发现，如果交易量相对于流动性池巨大的储备量而言微乎其微，那么这笔交易就是按照价格进行的。
+
+\begin{equation}
+\begin{aligned}
+    \frac{\Delta x}{\Delta y} 
+    & = \frac{\Delta x}{y_0-\frac{k}{x_0+\Delta x}} \\
+    & = \frac{\Delta x (x_0+\Delta x)}{y_0 (x_0+\Delta x) - x_0y_0} \\
+    & = \frac{x_0 + \Delta x}{y_0} \\
+    & \approx \frac{x_0}{y_0} = p_X
+\end{aligned}
+\end{equation}
+
+如果交易量较大以至于相对于流动性池储备不可忽略，交易者可能会承受多余的成本，这就是去中心化交易所中的\textbf{滑点}（Slippage）。关于滑点的细节，我们将在下一节详细介绍。
+
+接下来让我们从交易所的角度来研究，这笔交易如何改变价格以反映供求关系的变化。交易完成后新的价格 $p_X'$ 满足
+
+\begin{equation}
+\begin{aligned}
+    p_X' 
+    & = \frac{y'}{x'} = \frac{x_0y_0}{(x_0+\Delta x)^2} \\
+    & < \frac{x_0y_0}{x_0^2} = \frac{y_0}{x_0} = p_X
+\end{aligned}
+\end{equation}
+
+这意味着新的价格比旧的价格更低。实际上这不难理解。交易者卖出 X 而买入 Y ，实际上是增加了对 Y 的需求与对 X 的供给。货币 X 供过于求导致价格下降，在代数上就体现为 $p_X' < p_X$。
+
+\begin{figure}[htbp]
+    \centering
+    \begin{tikzpicture}[scale = 1.1]
+        \draw[-latex] (0,0) -- (4,0) node[right] {$x$};
+        \draw[-latex] (0,0) -- (0,4) node[above] {$y$};
+        \draw[domain=0.52:3.75, thick, red] plot (\x, {2/\x});
+        \node at (1.5,3.5) {$\displaystyle y=\frac{k}{x}$};
+
+        \coordinate (A) at (1,2);
+        \coordinate (O) at (0,0);
+        \coordinate (B) at (1,0);
+        \coordinate (C) at (0,2);
+        \fill (A) circle (2pt);
+        \node[above right] at (A) {$A$};
+
+        \draw (A) -- (O);
+        \pic [draw, pic text=$\theta$, angle eccentricity=1.5] {angle = B--O--A};
+
+        \draw[dashed] (A) -- (B);
+        \draw[dashed] (A) -- (C);
+        \node[below] at (B) {$x_0$};
+        \node[left] at (C) {$y_0$};
+
+        
+        \coordinate (D) at (2,1);
+        \coordinate (E) at (2,0);
+        \coordinate (F) at (0,1);
+        \fill (D) circle (2pt);
+        \node[above right] at (D) {$B$};
+
+        \draw (D) -- (O);
+        \pic [draw, pic text=$\theta'$, angle eccentricity=1.3, angle radius=25] {angle = E--O--D};
+        
+        \draw[dashed] (D) -- (E);
+        \draw[dashed] (D) -- (F);
+        \node[below] at (E) {$x'$};
+        \node[left] at (F) {$y'$};
+
+        \draw[-latex, very thick, blue] (1.1,1.95) -- (1.9,1.15);
+        \draw[|<->|] (1,-0.7) -- node[below] {$\Delta x$} (2,-0.7);
+        \draw[|<->|] (-0.7,1) -- node[left] {$\Delta y$} (-0.7,2);
+
+    \end{tikzpicture}
+    \caption{交易改变了价格}
+\end{figure}
+
+图 5 是对这笔交易的形象化演绎。通过几何方法，我们也可以由 $\tan \theta' < \tan \theta$ 得出价格下降了。
+
+一次交易可能并不会对价格产生显著的影响，但是诸多交易者的合力将会共同组成那只看不见的手，推动价格朝着特定方向持续演化，直到形成新的均衡。
+
+交易使得流动性池的状态从 A 点移动到 B 点，但没有改变储备曲线本身。
+
+\subsection{改变流动性}
+
+通过前面的例子，我们发现，除了 $x$ 和 $y$ ，流动性 $k$ 的大小也是值得研究的对象。
+
+流动性过小有诸多危害：较高的滑点导致交易者付出更高成本，巨鲸可以很轻松地掏空流动性池引起价格剧烈变化，价格对交易过于敏感导致难以精确反映供求信息，交易者减少交易量导致流动性提供者收益下降……
+
+为了鼓励\textbf{流动性提供者}（Liquidity Provider, LP）向流动性池中注入更多资金， Uniswap 协议为每一个交易对设定了一个交易费。交易者需要支付。在
 
 \end{document}
 

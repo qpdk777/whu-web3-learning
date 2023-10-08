@@ -286,7 +286,62 @@ $$
 
 我们假设第一位流动性提供者存入了 $x_0$ 个货币 X 和 $y_0$ 个货币 Y ，而且这个价格并不存在套利空间，并设 $k_0 = x_0y_0$ 。交易者付出交易费引起再投资， $k$ 会缓慢地增大，但我们先忽略这一点，假设不存在交易费。
 
+若干次交易之后，流动性池中有 $x_1$ 个货币 X 和 $y_1$ 个货币 Y ，且依然满足 $x_1y_1=k$ 。这时，第二位 LP 决定向流动性池中加入 $x_2$ 个货币 X 和 $y_2$ 个货币 Y 。显然，他必须保证 $\displaystyle\frac{x_1}{y_1} = \frac{x_2}{y_2}$ ，否则就会存在套利空间。
 
+我们设 $x'=x_1+x_2, y'=y_1+y_2$ ，新的恒定积可由 $k' = x'y'$ 计算得出，新的恒定积公式为
+
+\begin{equation}
+    xy = k'
+\end{equation}
+
+显然 $k'>k$ 。
+
+公式 (10) 和公式 (4) 是同一形式、不同规模的反比例函数。在图像上，我们可以发现，新的储备曲线是由旧的储备曲线以原点为中心放缩得到的。
+
+\begin{figure}[htbp]
+    \centering
+    \begin{tikzpicture}
+        \draw[-latex] (0,0) -- (6,0) node[right] {$x$};
+        \draw[-latex] (0,0) -- (0,6) node[above] {$y$};
+        \draw[domain=0.52:3.75, thick, red] plot (\x, {2/\x});
+        \draw[domain=1.5:6, thick, blue] plot (\x, {9/\x});
+
+        \coordinate (A) at ({sqrt(2)},{sqrt(2)});
+        \coordinate (O) at (0,0);
+        \coordinate (B) at ({sqrt(2)},0);
+        \coordinate (C) at (0,{sqrt(2)});
+        \coordinate (D) at (3,3);
+        \coordinate (E) at (3,0);
+        \coordinate (F) at (0,3);
+
+        \fill (A) circle (2pt);
+        \node[above] at (A) {$A$};
+        \fill (D) circle (2pt);
+        \node[above] at (D) {$B$};
+
+        \draw (D) -- (O);
+        \pic [draw, pic text=$\theta$, angle eccentricity=1.5] {angle = B--O--A};
+
+        \draw[dashed] (A) -- (B);
+        \draw[dashed] (A) -- (C);
+        \node[below] at (B) {$x_1$};
+        \node[left] at (C) {$y_1$};
+
+        \draw[dashed] (D) -- (E);
+        \draw[dashed] (D) -- (F);
+        \node[below] at (E) {$x'$};
+        \node[left] at (F) {$y'$};
+
+        \node at (4.5,0.6) {$\displaystyle y=\frac{k}{x}$};
+        \node at (5,2.5) {$\displaystyle y=\frac{k'}{x}$};
+        
+        \draw[-latex, very thick, blue] (1.8,1.3) -- (3.2,2.7);
+        \draw[|<->|] ({sqrt(2)},-0.7) -- node[below] {$x_2$} (3,-0.7);
+        \draw[|<->|] (-0.7,{sqrt(2)}) -- node[left] {$y_2$} (-0.7,3);
+
+    \end{tikzpicture}
+    \caption{添加流动性引起储备曲线放缩}
+\end{figure}
 
 \end{document}
 

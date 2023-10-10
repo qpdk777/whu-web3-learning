@@ -48,13 +48,13 @@ Uniswap 是一个不断发展的交易协议。在 Uniswap V2 中，任意交易
     3x + y = 3x_0 + y_0
 \end{equation}
 
-这意味着，\textbf{留在机器中的可乐价值与硬币价值的总和是一个定值}，我们设 $k=3x_0+y_0$ ，于是有
+\noindent 这意味着，\textbf{留在机器中的可乐价值与硬币价值的总和是一个定值}，我们设 $k=3x_0+y_0$ ，于是有
 
 \begin{equation}
     3x + y = k
 \end{equation}
 
-将这个式子化为 $y = -3x + k$ ，并画出其函数图像，我们得到一个一次函数（如图2所示）。
+\noindent 将这个式子化为 $y = -3x + k$ ，并画出其函数图像，我们得到一个一次函数（如图2所示）。
 
 \begin{figure}[htbp]
     \centering
@@ -79,7 +79,7 @@ Uniswap 是一个不断发展的交易协议。在 Uniswap V2 中，任意交易
     3x + y = k'
 \end{equation}
 
-相应的函数图像变为
+\noindent 相应的函数图像变为
 
 \begin{figure}[htbp]
     \centering
@@ -113,7 +113,7 @@ Uniswap 使用\textbf{恒定积自动做市商}（Constant-Product Automatic Mar
     xy=k 
 \end{equation}
 
-恒成立，也就是说 $x$ 与 $y$ 的变化始终成反比例关系，保持其乘积是定值。
+\noindent 恒成立，也就是说 $x$ 与 $y$ 的变化始终成反比例关系，保持其乘积是定值。
 
 $x$ 与 $y$ 相对数量的变化反映了价格（汇率）的变化，而 $xy$ 的变化反映了流动性大小的变化。我们将在下面的一节中详细介绍。
 
@@ -180,19 +180,19 @@ $$
     x'y'=k
 \end{equation}
 
-解得
+\noindent 解得
 
 \begin{equation}
     y'=\frac{k}{x'}=\frac{k}{x_0+\Delta x}
 \end{equation}
 
-显然有 $y' < y_0$ 。实际上，交易所会将一笔数量为
+\noindent 显然有 $y' < y_0$ 。实际上，交易所会将一笔数量为
 
 \begin{equation}
     \Delta y = y_0 - y' = y_0 - \frac{k}{x_0+\Delta x}
 \end{equation}
 
-的货币 Y 发送给交易者。这样，一笔交易就完成了。
+\noindent 的货币 Y 发送给交易者。这样，一笔交易就完成了。
 
 首先，让我们从交易者的角度来研究，他的这笔交易是否合他的心意。交易者卖掉了 $\Delta x$ 个货币 X ，买来了 $\Delta y$ 个货币 Y 。如果初状态下价格 $\displaystyle p_X = \frac{y_0}{x_0}$ ，这笔买卖是不是按照价格进行的呢？通过下面的计算我们可以发现，如果交易量相对于流动性池巨大的储备量而言微乎其微，那么这笔交易就是按照价格进行的。
 
@@ -218,7 +218,7 @@ $$
 \end{aligned}
 \end{equation}
 
-这意味着新的价格比旧的价格更低。实际上这不难理解。交易者卖出 X 而买入 Y ，实际上是增加了对 Y 的需求与对 X 的供给。货币 X 供过于求导致价格下降，在代数上就体现为 $p_X' < p_X$。
+\noindent 这意味着新的价格比旧的价格更低。实际上这不难理解。交易者卖出 X 而买入 Y ，实际上是增加了对 Y 的需求与对 X 的供给。货币 X 供过于求导致价格下降，在代数上就体现为 $p_X' < p_X$。
 
 \begin{figure}[htbp]
     \centering
@@ -356,13 +356,13 @@ $$
      = \left| \frac{\Delta x}{y_0} \right|
 \end{equation}
     
-当 $y_0$ 增大时，这个值显然会减小。
+\noindent 当 $y_0$ 增大时，这个值显然会减小。
 
 \begin{equation}
     |p_X'-p_X| = \left| \frac{x_0y_0}{(x_0+\Delta x)^2} - \frac{y_0}{x_0} \right| = \left| \frac{2x_0y_0\Delta x - y_0(\Delta x)^2}{x_0(x_0+\Delta x)^2} \right|
 \end{equation}
 
-这个分式的分子是一个二次多项式，分母是一个三次多项式，当 $x_0,y_0$ 同比例增大时，分式的值显然会减小。
+\noindent 这个分式的分子是一个二次多项式，分母是一个三次多项式，当 $x_0,y_0$ 同比例增大时，分式的值显然会减小。
 
 除了代数证明，也可以使用几何方法证明这两个规律，请读者自行尝试。
 
@@ -380,17 +380,54 @@ $$
     s = \sqrt{x_0y_0}
 \end{equation}
 
-计算其初始份额，也就是流动性代币数量。
+\noindent 计算其初始份额，也就是流动性代币数量。
 
-若流动性池中已经有 $x_0$ 个货币 X 和 $y_0$ 个货币 Y ，已经铸造的流动性代币总量为 $s_0$ ， 某位 LP 存入了 $x_1$ 个货币 X 和 $y_1$ 个货币 Y （无套利），Uniswap 使用公式
+对于第二位及以后的 LP ，若流动性池中已经有 $x_0$ 个货币 X 和 $y_0$ 个货币 Y ，已经铸造的流动性代币总量为 $s_0$ ， 某位 LP 存入了 $x_1$ 个货币 X 和 $y_1$ 个货币 Y （无套利），Uniswap 使用公式
 
 \begin{equation}
     \Delta s = \frac{x_1}{x_0} s_0 = \frac{y_1}{y_0} s_0
 \end{equation}
 
-计算本次添加流动性铸造出的流动性代币数量。
+\noindent 计算本次添加流动性铸造出的流动性代币数量，并使用 $s_0 \leftarrow s_0 + \Delta s$ 更新总的份额值。
+
+提取流动性时，某位 LP 向流动性池发送数量为 $\Delta s$ 的流动性代币，自动做市商销毁这些代币，并将 $\Delta x$ 个货币 X 和 $\Delta y$ 个货币 Y 从流动性池中取出，发送给 LP ，其中 $\displaystyle \Delta x = \frac{\Delta s}{s_0} x_0, \Delta y = \frac{\Delta s}{s_0} y_0$ 。
 
 这样的计算方式能够保证不存在无风险套利机会。无论价格怎样变化，各个 LP 的贡献总是得到了公平公正的评估，最终收益分配也是公平公正的。
+
+\section{Uniswap 的相关风险}
+
+\subsection{流动性不足}
+
+现阶段， Uniswap 的流动性问题再怎么强调都不为过。前文已经提及，如果资金池的流动性不足，交易者会承受过大的滑点。这里我们再将相关危害拓展一下，探讨另外两个话题：三明治攻击和撤池跑路。
+
+在传统金融市场中，抢先交易（Front Running）往往被认为是一种市场操纵行为。交易者向经纪商发送交易请求后，经纪商可以根据掌握的信息进行套利。下面是一个例子。
+
+假设交易者委托经纪商以 1 美元购入 1 支股票，此时订单簿状况为
+
+\begin{table}[htbp]
+    \centering
+    \begin{tabular}{lll}
+        & 价格  & 数量 \\ \hline
+        卖2 & 1.2 & 1  \\ \hline
+        卖1 & 0.9 & 1 
+    \end{tabular}
+\end{table}
+
+\noindent 
+
+在真实的 Defi 交易市场上，时间不是连续的，而是离散的，这是区块链的特性决定的。一笔交易往往是随着其他许多笔交易一起在同一个区块中处理。假如在一个区块中，两个交易者都针对同一个交易对发出了交易广播，那么这两笔交易的先后顺序就会影响各自交易的实际价格。如果交易者 A 先于交易者 B 完成购买，那么价格就会被推高，交易者 B 购买时获得的实际价格就会高于期望价格，承受更大的滑点。
+
+矿工可以在公共内存池中自由地选择若干笔交易并进行任意排序，而矿工自己也可以发送交易广播。如果矿工发现。
+
+\subsection{无常损失}
+
+\subsection{诈骗与假币}
+
+\subsection{价格预言机失灵}
+
+\subsection{黑客攻击}
+
+监守自盗
 
 \end{document}
 

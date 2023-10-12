@@ -475,7 +475,7 @@ $$
     \end{matrix}
 \end{equation}
 
-\noindent 设 LP 在 0,1 时刻的资产（以 USD 计价）分别为 $B_0,B_1$ ，那么
+忽略赚取的手续费，设 LP 在 0,1 时刻的资产（以 USD 计价）分别为 $B_0,B_1$ ，那么
 
 \begin{equation}
     r = \frac{B_1}{B_0} 
@@ -484,7 +484,9 @@ $$
     = \sqrt{\frac{a_0b_0}{a_1b_1}} \cdot \frac{a_1^2+b_1^2}{a_0^2+b_0^2}
 \end{equation}
 
-\noindent 即代表 LP 通过。
+\noindent 即代表 LP 通过提供流动性带来的收益。很显然，若 $a_1>a_0,b_1>b_0$ ，则 $r>1$ ， LP 必然获利；若 $a_1<a_0,b_1<b_0$ ，则 $r<1$ ， LP 必然亏损；若 X 的价格和 Y 的价格呈负相关，则 LP 的损益情况还需进一步讨论，此处不做展开。
+
+下面我们考虑 LP 不参与提供流动性，而只是简单持有代币，设其在 1 时刻的资产为 $B^* = a_1x_0+b_1y_0$ 。
 
 \subsection{诈骗、假币与洗钱}
 

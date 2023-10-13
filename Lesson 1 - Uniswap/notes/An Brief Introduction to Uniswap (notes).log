@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.8.23)  14 OCT 2023 00:48
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.8.23)  14 OCT 2023 03:35
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -557,89 +557,92 @@ Package caption Info: New subtype `subfigure' on input line 238.
 \c@subfigure=\count332
 Package caption Info: New subtype `subtable' on input line 238.
 \c@subtable=\count333
+) (c:/texlive/2023/texmf-dist/tex/latex/url/url.sty
+\Urlmuskip=\muskip18
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 ) (c:/texlive/2023/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryangles.code.tex
 File: tikzlibraryangles.code.tex 2023-01-15 v3.1.10 (3.1.10)
 ) (c:/texlive/2023/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryquotes.code.tex
 File: tikzlibraryquotes.code.tex 2023-01-15 v3.1.10 (3.1.10)
-) (./An Brief Introduction to Uniswap (notes).aux)
+)
+No file "An Brief Introduction to Uniswap (notes)".aux.
 \openout1 = `"An Brief Introduction to Uniswap (notes).aux"'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 14.
-LaTeX Font Info:    ... okay on input line 14.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 14.
-LaTeX Font Info:    ... okay on input line 14.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 14.
-LaTeX Font Info:    ... okay on input line 14.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 14.
-LaTeX Font Info:    ... okay on input line 14.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 14.
-LaTeX Font Info:    ... okay on input line 14.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 14.
-LaTeX Font Info:    ... okay on input line 14.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 14.
-LaTeX Font Info:    ... okay on input line 14.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 14.
-LaTeX Font Info:    ... okay on input line 14.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
 
 Package fontspec Info: Adjusting the maths setup (use [no-math] to avoid
 (fontspec)             this).
 
 \symlegacymaths=\mathgroup4
 LaTeX Font Info:    Overwriting symbol font `legacymaths' in version `bold'
-(Font)                  OT1/cmr/m/n --> OT1/cmr/bx/n on input line 14.
-LaTeX Font Info:    Redeclaring math accent \acute on input line 14.
-LaTeX Font Info:    Redeclaring math accent \grave on input line 14.
-LaTeX Font Info:    Redeclaring math accent \ddot on input line 14.
-LaTeX Font Info:    Redeclaring math accent \tilde on input line 14.
-LaTeX Font Info:    Redeclaring math accent \bar on input line 14.
-LaTeX Font Info:    Redeclaring math accent \breve on input line 14.
-LaTeX Font Info:    Redeclaring math accent \check on input line 14.
-LaTeX Font Info:    Redeclaring math accent \hat on input line 14.
-LaTeX Font Info:    Redeclaring math accent \dot on input line 14.
-LaTeX Font Info:    Redeclaring math accent \mathring on input line 14.
-LaTeX Font Info:    Redeclaring math symbol \Gamma on input line 14.
-LaTeX Font Info:    Redeclaring math symbol \Delta on input line 14.
-LaTeX Font Info:    Redeclaring math symbol \Theta on input line 14.
-LaTeX Font Info:    Redeclaring math symbol \Lambda on input line 14.
-LaTeX Font Info:    Redeclaring math symbol \Xi on input line 14.
-LaTeX Font Info:    Redeclaring math symbol \Pi on input line 14.
-LaTeX Font Info:    Redeclaring math symbol \Sigma on input line 14.
-LaTeX Font Info:    Redeclaring math symbol \Upsilon on input line 14.
-LaTeX Font Info:    Redeclaring math symbol \Phi on input line 14.
-LaTeX Font Info:    Redeclaring math symbol \Psi on input line 14.
-LaTeX Font Info:    Redeclaring math symbol \Omega on input line 14.
-LaTeX Font Info:    Redeclaring math symbol \mathdollar on input line 14.
-LaTeX Font Info:    Redeclaring symbol font `operators' on input line 14.
+(Font)                  OT1/cmr/m/n --> OT1/cmr/bx/n on input line 15.
+LaTeX Font Info:    Redeclaring math accent \acute on input line 15.
+LaTeX Font Info:    Redeclaring math accent \grave on input line 15.
+LaTeX Font Info:    Redeclaring math accent \ddot on input line 15.
+LaTeX Font Info:    Redeclaring math accent \tilde on input line 15.
+LaTeX Font Info:    Redeclaring math accent \bar on input line 15.
+LaTeX Font Info:    Redeclaring math accent \breve on input line 15.
+LaTeX Font Info:    Redeclaring math accent \check on input line 15.
+LaTeX Font Info:    Redeclaring math accent \hat on input line 15.
+LaTeX Font Info:    Redeclaring math accent \dot on input line 15.
+LaTeX Font Info:    Redeclaring math accent \mathring on input line 15.
+LaTeX Font Info:    Redeclaring math symbol \Gamma on input line 15.
+LaTeX Font Info:    Redeclaring math symbol \Delta on input line 15.
+LaTeX Font Info:    Redeclaring math symbol \Theta on input line 15.
+LaTeX Font Info:    Redeclaring math symbol \Lambda on input line 15.
+LaTeX Font Info:    Redeclaring math symbol \Xi on input line 15.
+LaTeX Font Info:    Redeclaring math symbol \Pi on input line 15.
+LaTeX Font Info:    Redeclaring math symbol \Sigma on input line 15.
+LaTeX Font Info:    Redeclaring math symbol \Upsilon on input line 15.
+LaTeX Font Info:    Redeclaring math symbol \Phi on input line 15.
+LaTeX Font Info:    Redeclaring math symbol \Psi on input line 15.
+LaTeX Font Info:    Redeclaring math symbol \Omega on input line 15.
+LaTeX Font Info:    Redeclaring math symbol \mathdollar on input line 15.
+LaTeX Font Info:    Redeclaring symbol font `operators' on input line 15.
 LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
-(Font)              `operators' in the math version `normal' on input line 14.
+(Font)              `operators' in the math version `normal' on input line 15.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  OT1/cmr/m/n --> TU/lmr/m/n on input line 14.
+(Font)                  OT1/cmr/m/n --> TU/lmr/m/n on input line 15.
 LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
-(Font)              `operators' in the math version `bold' on input line 14.
+(Font)              `operators' in the math version `bold' on input line 15.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  OT1/cmr/bx/n --> TU/lmr/m/n on input line 14.
+(Font)                  OT1/cmr/bx/n --> TU/lmr/m/n on input line 15.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  TU/lmr/m/n --> TU/lmr/m/n on input line 14.
+(Font)                  TU/lmr/m/n --> TU/lmr/m/n on input line 15.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
-(Font)                  OT1/cmr/m/it --> TU/lmr/m/it on input line 14.
+(Font)                  OT1/cmr/m/it --> TU/lmr/m/it on input line 15.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
-(Font)                  OT1/cmr/bx/n --> TU/lmr/b/n on input line 14.
+(Font)                  OT1/cmr/bx/n --> TU/lmr/b/n on input line 15.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
-(Font)                  OT1/cmss/m/n --> TU/lmss/m/n on input line 14.
+(Font)                  OT1/cmss/m/n --> TU/lmss/m/n on input line 15.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
-(Font)                  OT1/cmtt/m/n --> TU/lmtt/m/n on input line 14.
+(Font)                  OT1/cmtt/m/n --> TU/lmtt/m/n on input line 15.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  TU/lmr/m/n --> TU/lmr/b/n on input line 14.
+(Font)                  TU/lmr/m/n --> TU/lmr/b/n on input line 15.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  OT1/cmr/bx/it --> TU/lmr/b/it on input line 14.
+(Font)                  OT1/cmr/bx/it --> TU/lmr/b/it on input line 15.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/cmss/bx/n --> TU/lmss/b/n on input line 14.
+(Font)                  OT1/cmss/bx/n --> TU/lmss/b/n on input line 15.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/cmtt/m/n --> TU/lmtt/b/n on input line 14.
-
+(Font)                  OT1/cmtt/m/n --> TU/lmtt/b/n on input line 15.
 
 Package pgfplots Warning: running in backwards compatibility mode (unsuitable tick labels; missing features). Consider writing \pgfplotsset{compat=1.18} into your preamble.
- on input line 14.
+ on input line 15.
 
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
@@ -649,9 +652,9 @@ Package caption Info: End \AtBeginDocument code.
 File: 订单簿示意图.jpg Graphic file (type bmp)
 <订单簿示意图.jpg>
 LaTeX Font Info:    Font shape `TU/SimSun(0)/m/sl' in size <12> not available
-(Font)              Font shape `TU/SimSun(0)/m/it' tried instead on input line 43.
+(Font)              Font shape `TU/SimSun(0)/m/it' tried instead on input line 44.
  [2] [3]
-Overfull \hbox (5.26875pt too wide) in paragraph at lines 79--80
+Overfull \hbox (5.26875pt too wide) in paragraph at lines 80--81
 []\TU/SimSun(0)/m/n/12 在 去 中 心 化 金 融 中，|  流 动 性 的 概 念 发 生 了 一 定 的 改 变。|  笔 者 认 为，| \TU/lmr/m/n/12 Uniswap
  []
 
@@ -659,26 +662,66 @@ Overfull \hbox (5.26875pt too wide) in paragraph at lines 79--80
 File: 三明治攻击示意图.png Graphic file (type bmp)
 <三明治攻击示意图.png>
 
-Overfull \hbox (8.33858pt too wide) in paragraph at lines 429--430
+Overfull \hbox (8.33858pt too wide) in paragraph at lines 430--431
  [][] 
  []
 
 [13]
 File: rugpull.jpeg Graphic file (type bmp)
 <rugpull.jpeg>
- [14] [15] [16] [17] [18] [19] (./An Brief Introduction to Uniswap (notes).aux)
+ [14] [15] [16] [17] [18] [19] [20]
+File: 闪电记账示意图.jpg Graphic file (type bmp)
+<闪电记账示意图.jpg>
+ [21]
+File: Hooks.png Graphic file (type bmp)
+<Hooks.png>
+ [22]
+
+Package fontspec Info: Could not resolve font "FangSong/BI" (it probably
+(fontspec)             doesn't exist).
+
+
+Package fontspec Info: Could not resolve font "FangSong/B" (it probably
+(fontspec)             doesn't exist).
+
+
+Package fontspec Info: Could not resolve font "FangSong/I" (it probably
+(fontspec)             doesn't exist).
+
+
+Package fontspec Info: Font family 'FangSong(0)' created for font 'FangSong'
+(fontspec)             with options [Script={CJK}].
+(fontspec)              
+(fontspec)              This font family consists of the following NFSS
+(fontspec)             series/shapes:
+(fontspec)              
+(fontspec)             - 'normal' (m/n) with NFSS spec.:
+(fontspec)             <->"FangSong/OT:script=hani;language=dflt;"
+(fontspec)             - 'small caps'  (m/sc) with NFSS spec.: 
+
+ [23]
+Overfull \hbox (1.97816pt too wide) in paragraph at lines 663--664
+[]\TU/lmr/m/n/12 Liquidity Math in Uniswap V3\TU/SimSun(0)/m/n/12 ：| $[][][][][] [] [] [] [][][][][][][][][] [] [][][][][][] [] [][] [] [][][][] []
+ []
+
+
+Overfull \hbox (11.15015pt too wide) in paragraph at lines 667--668
+[]\TU/lmr/m/n/12 An analysis of Uniswap markets \TU/SimSun(0)/m/n/12 ：| $[][][][][] [] [] [] [][][][][][][] [] [][][][][][] [] [][] [] [][][][][][] []
+ []
+
+[24] [25] (./An Brief Introduction to Uniswap (notes).aux)
  ***********
 LaTeX2e <2023-06-01> patch level 1
 L3 programming layer <2022/07/14>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 31628 strings out of 475845
- 872854 string characters out of 5781374
- 2979759 words of memory out of 5000000
- 52243 multiletter control sequences out of 15000+600000
- 564709 words of font info for 83 fonts, out of 8000000 for 9000
+ 31837 strings out of 475845
+ 877098 string characters out of 5781374
+ 2980858 words of memory out of 5000000
+ 52438 multiletter control sequences out of 15000+600000
+ 564749 words of font info for 88 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 93i,13n,97p,760b,2750s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 93i,13n,97p,760b,2753s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on An Brief Introduction to Uniswap (notes).pdf (19 pages).
+Output written on An Brief Introduction to Uniswap (notes).pdf (25 pages).

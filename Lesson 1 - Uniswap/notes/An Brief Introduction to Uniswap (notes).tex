@@ -5,6 +5,7 @@
 \usepackage{pgfplots}
 \usepackage{pgfplotstable}
 \usepackage{subcaption}
+\usepackage{url}
 \usetikzlibrary{angles,quotes}
 
 \title{Uniswap简明导论}
@@ -492,25 +493,6 @@ $$
 
 在 $a_0=b_0=1$ 时，画出 $r$ 的图像如图 9(a) 所示。函数在 $z=1$ 平面以下的部分代表亏损，在 $z=1$ 平面以上的部分代表盈利， $r$ 与 $z=1$ 的交线代表既不获利也不亏损的情况。
 
-% \begin{figure}
-%     \centering
-%     \includegraphics*[width=10cm]{r.png}
-%     \caption{$r$ 图像}
-% \end{figure}
-
-% \begin{figure}
-%     \begin{subfigure}{0.5\textwidth}
-%         \centering
-%         \includegraphics*[width=\textwidth]{r.png}
-%         \caption{$r$ 图像}
-%     \end{subfigure}
-%     \begin{subfigure}{0.5\textwidth}
-%         \centering
-%         \includegraphics*[width=\textwidth]{r'.png}
-%         \caption{$r^*$ 图像}
-%     \end{subfigure}
-% \end{figure}
-
 下面我们考虑 LP 不参与提供流动性，而只是简单持有代币的损益。设其在 1 时刻的资产为 $B^* = a_1x_0+b_1y_0$ ，收益用
 
 \begin{equation}
@@ -563,9 +545,17 @@ $$
     \caption{无常损失 $\delta$ 图像 \\ 其中 $a_0=b_0=1$}
 \end{figure}
 
-需要特别注意的是，并不是说只要无常损失存在， LP 就必然亏损，因为两种代币的价格按照不同的速度上涨也会给 LP 带来盈利。无常损失是一种\textbf{机会损失}，它是相较于单纯持有代币的收益而言的损失。
+需要特别注意的是，并不是说只要无常损失存在， LP 就必然亏损，因为两种代币的价格按照不同的速度上涨也会给 LP 带来盈利，尽管盈利的量少于单纯持有两种代币。无常损失是一种\textbf{机会损失}，它是相较于单纯持有代币的收益而言的损失。
 
-\subsection{诈骗、假币与洗钱}
+当两种代币的价格一起上涨或反复波动时，无常损失尚可通过流动性收益得到一定程度的弥补。但最可怕的情况是，如果两种代币的价格以不同的速度下跌，无常损失的存在将会放大 LP 的亏损。因此，无常损失是 LP 需要优先考虑的风险因素。
+
+有一些交易所提供“双币投资”“Defi挖矿”“流动性挖矿”等理财产品，声称年化收益率高达 200\% 甚至更高。这些理财产品的就是将用户的资金拿去提供流动性。他们承诺的收益率只会在币对相对价格不变的情况下实现。币圈的价格波动之剧烈，连上帝都预测不到一年以后币对的相对价格与现在相比会产生多大差距。很多投资者看着高收益率的噱头匆忙投入资金，没过多久就会发现自己的流动性池份额变得几乎一文不值。
+
+规避无常损失的最好方法就是只为两个价格互相锚定的代币提供流动性，比如 USDT 和 DAI 。其次可以选择价格互为正比例关系并且各自内在价值稳定的代币，比如 BTC 和 ETH 。其他的流动性提供方式，都可以被认为是高风险投资。
+
+无常损失真的如许多机构所言，是短暂（Impermanent）的吗？实际上，因为不同代币项目发展的方式千差万别，绝大多数交易对都永远不会再回到当初 LP 投入资金时的价格，无常损失产生后也实际上几乎永远不会消除。更何况随着时间的推移，许多僵尸项目的代币价格只会持续性地下跌，流动性池的交易费收益相比于如此剧烈的资产价值完全是杯水车薪， LP 最终很可能血本无归。
+
+\subsection{诈骗、假币与洗钱犯罪}
 
 在创建 ERC20 代币的时候，创建人可以给代币赋予任何代码，包括 ETH、BTC、USDT 等主流货币的代码。尽管这些伪代币的合约地址与本尊显然不同，但每年仍有不计其数的人被这些假币蒙混过关，造成不可挽回的财产损失。 Uniswap 并没有办法杜绝假币，甚至经常扮演假币流通的帮凶。一些假币的流动性池看似具有套利机会，实际上是资金只进不出的貔貅盘。
 
@@ -593,9 +583,104 @@ Uniswap 合约的状态变量中存储有两种代币的储备量，可以通过
 
 然而，利用 Uniswap 漏洞的人不一定是名不见经传的黑客，也有可能是某些不怀好意的开发者。他们深谙 Uniswap 的某些漏洞或特性，在自己设计的合约中留下后门，待到投资者投入资金后用自己的另一个钱包实现攻击并获利，使自己在公众面前看起来像一个无辜的受害者。这种监守自盗的行为毫无疑问是一种犯罪，但是单用链上交易记录作为证据很难证明开发者的罪行。
 
-Uniswap V2 给出了一种更加安全的解决方案，将 LP 的资金及基础交易功能和其他衍生功能隔离开来，有效防止 LP 的资金被黑客盗取。具体地说，一个交易所由核心合约和路由合约共同组成。核心合约存放了 LP 的资金，只实现了最基础的交易逻辑，其简短的代码经过无数开发人员与公众极其严苛的审计，使得其攻击面得以最小化；而路由合约则用于实现其他复杂功能，比如添加或移除流动性、多路径交换和原生 ETH 交易。
+Uniswap V2 给出了一种更加安全的解决方案，将 LP 的资金及基础交易功能和其他衍生功能隔离开来，有效防止 LP 的资金被黑客盗取。具体地说，一个交易所由核心合约和边缘合约共同组成。核心合约存放了 LP 的资金，只实现了最基础的交易逻辑，其简短的代码经过无数开发人员与公众极其严苛的审计，使得其攻击面得以最小化；而边缘合约则用于实现其他复杂功能，比如添加或移除流动性、多路径交换和原生 ETH 交易。
 
 随着 Uniswap 不断升级，目前针对 Uniswap 本身的攻击变得越来越罕见， Uniswap 的改进过程也为其他 Defi 项目的安全工作提供了宝贵的经验。
+
+\section{Uniswap 的新特性}
+
+\subsection{集中流动性}
+
+传统的 CPAMM 功能强大，其价格值域覆盖了整个 $(0,+\infty)$ 。但是我们真的需要这么大的价格值域吗？ BTC 不可能跌到 10000 美元以下， DOGE 也不可能涨到 100 美元以上。很多根本不可能触及的价格点位，在实际操作中是没有意义的。
+
+一部分 LP 可能不愿意承受过大的无常损失，因此当价格波动超出一定范围后他们会选择撤出流动性，待价格重新回归到合理范围后再存入流动性，一来二去费时费力又费钱。
+
+Uniswap V3 推出了集中流动性，即允许 LP 设定部分资金只在某个特定价格范围内提供流动性。一旦价格超出这个范围，该部分资金便会被暂时搁置。这样一来，原本覆盖整个正实数集的流动性就可以被集中到一个合理的小范围内，使得该价格范围内的流动性大大提高。
+
+体现在图像上，集中流动性其实是将储备曲线向着原点平移，如图 10 所示。
+
+\begin{figure}
+    \centering
+    \begin{tikzpicture}
+        \draw[-latex] (0,0) -- (4,0) node[right] {$x$};
+        \draw[-latex] (0,0) -- (0,4) node[above] {$y$};
+        
+        \draw[domain=0.28:3.5, red, thick] plot (\x, {1/\x});
+        \draw[domain=0:1.5, blue, thick] plot (\x, {1/(\x+0.5)-0.5});
+
+        \draw[-latex, blue, thick] (0.95,0.95) -- (0.55,0.55);
+    \end{tikzpicture}
+    \caption{集中流动性使储备曲线平移}
+\end{figure}
+
+\subsection{单例和闪电记账}
+
+V3 及以前的版本允许使用工厂合约对一个本质相同交易对创建多个流动性池，如果你用搜索引擎搜索 WBTC/WETH ，你会发现一大堆流动性池。这样做会不可避免地稀释流动性。实际上，如果两个的流动性池中的代币是相同的，那么他们完全可以合并成一个新的大流动性池。
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics*[width=12cm]{闪电记账示意图.jpg}
+    \caption{闪电记账示意图}
+\end{figure}
+
+
+事实上， Uniswap V4 的野心远不止将所有本质相同的流动性池合并在一起，开发者还希望用单例模式实现整个协议。\textbf{单例模式}（Singleton Pattern）本来指程序设计中一个类只能拥有一个实例的模式， Uniswap V4 则是让所有的流动性池都由一个合约来管理。这种管理方式使得流动性最大限度地合并，创建新币对的费用也降低了 99\% 。
+
+得益于单例模式的实现，\textbf{闪电记账}（Flash Accounting）使得多重交换的过程只需要支付资金进出系统的两次 gas fee ，而不是像 V3 中那样每次交换都需要支付一次 gas fee。对于较长的交换路径，闪电记账的池间路由会节省大量的 gas fee，从而降低了交易者的交易成本。
+
+\subsection{挂钩}
+
+\textbf{挂钩}（Hooks）其实是一个与流动性池相匹配的外部合约，其中实现了当流动性池在特定时间（初始化、调整持仓、交换和支付的前后）检查是否满足特定条件，并执行相应操作。
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=10cm]{Hooks.png}
+    \caption{挂钩示意图}
+\end{figure}
+
+挂钩的存在使得流动性池可以更加个性化，同时也对 Uniswap 的衍生开发规定了一些指导性的范式。
+
+在笔者看来，挂钩注定是一个简单但具有极其重大影响力的发明。它甚至比此前 Uniswap 所有的升级与改进都更加重要。在可预见的未来，挂钩将成为每一个衍生开发者的日常工具，并催生出一大批创新性金融产品。
+
+\section{结论}
+
+本文讲述了 Uniswap 的基本原理、发展历程、风险因素和新特性。但受篇幅和本人知识水平所限，还有很多内容没能涵盖。Uniswap 的社区治理、Uniswap Labs 公司、 LP 做市收益的实证分析都是值得深入研究的内容。作为 DEX 中当之无愧的佼佼者， Uniswap 值得我们持续关注并认真学习。
+
+\section*{思考题}
+
+\begin{enumerate}
+    \item 了解了 Uniswap 的利弊之后，你是更愿意选择中心化交易所还是去中心化交易所？为什么？
+    \item 交易费过高会提升交易者的交易成本，过低又会打击 LP 的积极性。你认为什么水平的交易费才是最合适的？你是根据什么原则来确定交易费水平的？
+    \item 在你看来，相较于旧版的多池，单例模式是否违背了 Web3 去中心化的核心价值观？用一个合约管理所有的流动性池会造成多大的风险？这种风险相比于它带来的方便性是值得我们去承担的吗？
+    \item 从宏观经济角度来看，为了保持交易所的流动性，社会总是需要在流动性池中锁定一笔价值不菲的资金。在你看来，这笔资金应当被视为储蓄还是投资？假如一个实力雄厚的巨鲸（或者称之为“政府”）向流动性池注入大笔资金，会对经济系统造成什么影响？
+    \item 你认为还有哪些值得思考的问题？
+\end{enumerate}
+
+\section*{推荐阅读}
+
+\begin{enumerate}
+    \item Uniswap V3 白皮书： \url{https://uniswap.org/whitepaper-v3.pdf}
+    \item Liquidity Math in Uniswap V3： \url{https://atiselsts.github.io/pdfs/uniswap-v3-liquidity-math.pdf}
+    \item Uniswap V4 白皮书草稿： \url{https://github.com/Uniswap/v4-core/blob/main/whitepaper-v4-draft-zh.pdf}
+    \item On-chain Foreign Exchange and Cross-border Payments ： \url{https://uniswap.org/OnchainFX.pdf}
+    \item Risks and Returns of Uniswap V3 Liquidity Providers ： \url{https://arxiv.org/pdf/2205.08904.pdf}
+    \item An analysis of Uniswap markets ： \url{https://angeris.github.io/papers/uniswap_analysis.pdf}
+    \item Uniswap and the emergence of the decentralized exchange ： \url{https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3715398}
+    \item Demystifying Just-in-Time (JIT) Liquidity Attacks on Uniswap V3 ： \url{https://eprint.iacr.org/2023/973.pdf}
+    \item Exploring Price Accuracy on Uniswap V3 in Times of Distress ： \url{https://arxiv.org/pdf/2208.09642v2.pdf}
+\end{enumerate}
+
+\section*{免责声明}
+
+本文所有内容不构成投资建议。
+
+本文受益于许多研究人员的研究成果，但因为本人太懒，没有一一注明。在此感谢所有的研究人员的努力。
+
+\section*{版权协议}
+
+本文遵循 MIT 开源协议。
+
+\flushright 2023 年 10 月 14 日 于珞珈山
 
 \end{document}
 

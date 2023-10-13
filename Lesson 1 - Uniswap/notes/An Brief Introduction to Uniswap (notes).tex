@@ -3,6 +3,7 @@
 \usepackage{tikz}
 \usepackage{amsmath}
 \usepackage{pgfplots}
+\usepackage{pgfplotstable}
 \usepackage{subcaption}
 \usetikzlibrary{angles,quotes}
 
@@ -107,7 +108,7 @@ Uniswap 是一个不断发展的交易协议。在 Uniswap V2 中，任意交易
 
 可口可乐交易所的例子非常简明，但是它的弊端十分明显——可乐的价格是不能变化的。在真正的金融市场上，资产价格应当随着供求关系的变化产生波动。
 
-我们假设有人用货币 X 和货币 Y 一起建立了一个\textbf{交易对}（Pair），记作 X/Y ，使得任何人都可以使用一种资产交易另一种资产。在这里，我们称 X 为\textbf{基准货币}（Base Currency），称 Y 为\textbf{计价货币}（Quote Currency）。
+我们假设有人用货币 X 和货币 Y 一起建立了一个\textbf{交易对}（Pair），记作 Y/X ，使得任何人都可以使用一种资产交易另一种资产。在这里，我们称 X 为\textbf{基准货币}（Base Currency），称 Y 为\textbf{计价货币}（Quote Currency）。
 
 Uniswap 为两种资产建立起一个\textbf{流动性池}（Liquidity Pool），其中储备有若干 X 和 Y。设 X 的储备数量为 $x$ ，Y 的储备数量为 $y$ ，这两个量是变量。
 
@@ -161,7 +162,7 @@ $$
 
         \node at (1.5,3.5) {$\displaystyle y=\frac{k}{x}$};
     \end{tikzpicture}
-    \caption{X/Y交易对储备图}
+    \caption{Y/X交易对储备图}
 \end{figure}
 
 很显然，如此得到的价格的值域是 $(0,+\infty)$ ，符合实际情况。
@@ -461,7 +462,7 @@ $$
             \begin{aligned}
                 & X/USD = a_0 \\
                 & Y/USD = b_0 \\
-                & X/Y = \frac{x_0}{y_0}\\
+                & Y/X = \frac{x_0}{y_0}\\
                 & x_0y_0 = k
             \end{aligned}
         \right.
@@ -470,23 +471,24 @@ $$
             \begin{aligned}
                 & X/USD = a_1 \\
                 & Y/USD = b_1 \\
-                & X/Y = \frac{x_1}{y_1}\\
+                & Y/X = \frac{x_1}{y_1}\\
                 & x_1y_1 = k
             \end{aligned}
         \right.
     \end{matrix}
 \end{equation}
 
+根据上式可以导出 $a_0x_0=b_0y_0, a_1x_1=b_1y_1$ 。实际上，这是恒定积做市商的另一个重要推论：\textbf{在确定时刻，以第三种货币作为计价货币，流动性池中的两种货币的储备价值必然相等}。
+
 忽略赚取的手续费，只考虑价格变化带来的资产价值波动。设 LP 在 0,1 时刻的资产（以 USD 计价）分别为 $B_0,B_1$ ，那么
 
 \begin{equation}
     r = \frac{B_1}{B_0} 
     = \frac{a_1x_1+b_1y_1}{a_0x_0+b_0y_0} 
-    = \frac{a_1^{\frac{3}{2}}b_1^{-\frac{1}{2}} + b_1^{\frac{3}{2}}a_1^{-\frac{1}{2}}}{a_0^{\frac{3}{2}}b_0^{-\frac{1}{2}} + b_0^{\frac{3}{2}}a_0^{-\frac{1}{2}}} 
-    = \sqrt{\frac{a_0b_0}{a_1b_1}} \cdot \frac{a_1^2+b_1^2}{a_0^2+b_0^2}
+    = \frac{\sqrt{a_1b_1}}{\sqrt{a_0b_0}}
 \end{equation}
 
-\noindent 即代表 LP 通过提供流动性带来的收益。很显然，若 $a_1>a_0,b_1>b_0$ ，则 $r>1$ ， LP 必然获利；若 $a_1<a_0,b_1<b_0$ ，则 $r<1$ ， LP 必然亏损；若 X 的价格和 Y 的价格呈负相关，则 LP 的损益情况还需进一步讨论。这一规律其实不难理解：假如 LP 存入的两种货币都相对于第三种货币急剧贬值，那么他很难靠微薄的流动性利润弥补大幅度的资产减值。
+\noindent 即代表 LP 通过提供流动性带来的收益。如果价格的几何平均数增大，那么 LP 就可以获利。
 
 在 $a_0=b_0=1$ 时，画出 $r$ 的图像如图 9(a) 所示。函数在 $z=1$ 平面以下的部分代表亏损，在 $z=1$ 平面以上的部分代表盈利， $r$ 与 $z=1$ 的交线代表既不获利也不亏损的情况。
 
@@ -496,38 +498,82 @@ $$
 %     \caption{$r$ 图像}
 % \end{figure}
 
-\begin{figure}
-    \begin{subfigure}{0.5\textwidth}
-        \centering
-        \includegraphics*[width=\textwidth]{r.png}
-        \caption{$r$ 图像}
-    \end{subfigure}
-    \begin{subfigure}{0.5\textwidth}
-        \centering
-        \includegraphics*[width=\textwidth]{r_.png}
-        \caption{$r^*$ 图像}
-    \end{subfigure}
-\end{figure}
+% \begin{figure}
+%     \begin{subfigure}{0.5\textwidth}
+%         \centering
+%         \includegraphics*[width=\textwidth]{r.png}
+%         \caption{$r$ 图像}
+%     \end{subfigure}
+%     \begin{subfigure}{0.5\textwidth}
+%         \centering
+%         \includegraphics*[width=\textwidth]{r'.png}
+%         \caption{$r^*$ 图像}
+%     \end{subfigure}
+% \end{figure}
 
-下面我们考虑 LP 不参与提供流动性，而只是简单持有代币的损益。设其在 1 时刻的资产为 $B^* = a_1x_0+b_1y_0$ 收益用
+下面我们考虑 LP 不参与提供流动性，而只是简单持有代币的损益。设其在 1 时刻的资产为 $B^* = a_1x_0+b_1y_0$ ，收益用
 
 \begin{equation}
     r^* = \frac{B^*}{B_0} = \frac{a_1x_0+b_1y_0}{a_0x_0+b_0y_0}
 \end{equation}
 
-\noindent 来表示。在 $a_0=b_0=x_0=y_0=1$ 时，其函数图像如图 9(b) 所示。
+\noindent 来表示。
 
-我们发现 $B_1>B^*$ 不一定成立，也就是说，相比于简单持有代币，提供流动性并不总是一个更好的选择。
+很显然，我们并不能一口咬定 $r>r^*$ 恒成立，也就是说提供流动性不一定就是比单纯持有更好的选择。直观而肤浅地理解，在恒定积自动做市商的调控下，更值钱的代币将会流出流动性池，而劣币的占有比例以及绝对数额都会增大。这其中存在着相对抗的反向变化趋势，而两种对抗趋势的占优者即决定 LP 的损益。
+
+但光理解到这一步还不够，我们设无常损失率为 $\delta$ ，有
+
+\begin{equation}
+    \begin{aligned}
+        \delta 
+        & = r - r^*  \\ 
+        & = \frac{a_1(x_1-x_0) + b_1(y_1-y_0)}{a_0x_0 + b_0y_0} \\
+        & = \frac{2\sqrt{a_1b_1} - \left( a_1\sqrt{\frac{b_0}{a_0}} + b_1\sqrt{\frac{a_0}{b_0}} \right)}{2\sqrt{a_0b_0}} \\
+        & \le \frac{2\sqrt{a_1b_1} - 2\sqrt{a_1\sqrt{\frac{b_0}{a_0}} \cdot b_1\sqrt{\frac{a_0}{b_0}}}}{2\sqrt{a_0b_0}} \\
+        & = \frac{2\sqrt{a_1b_1} - 2\sqrt{a_1b_1}}{2\sqrt{a_0b_0}} \\
+        & = 0
+    \end{aligned}
+\end{equation}
+
+\noindent 当且仅当 $\displaystyle a_1\sqrt{\frac{b_0}{a_0}} = b_1\sqrt{\frac{a_0}{b_0}}$ 即 $\displaystyle \frac{a_0}{b_0} = \frac{a_1}{b_1}$ 时取等号。
+
+无常损失是由于流动性池中两种代币的\textbf{相对}价格变化导致的，也就是交易对价格变化导致的。之所以称之为“无常”，是因为只要当两种代币的相对价格偏离原始相对价格时，无常损失就会产生；而当他们的相对价格回归原始相对价格时，无常损失就会消失。如果 LP 在相对价格偏离后选择撤出流动性，那么无常损失就实现为永久损失。
+
+下图是当 $a_0=b_0=1$ 时的无常损失图像。可以观察到，函数与 $z=0$ 平面相切于 $y=x$ 直线。
+
+\begin{figure}
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+          xlabel={$a_1$},
+          ylabel={$b_1$},
+          zlabel={$\delta$},
+          domain=0:10,
+          domain y=0:10,
+          view={62.5}{45},
+          zmax=0,
+        ]
+      
+        \addplot3[surf, colormap/viridis, shader=interp, samples=60] {(2*sqrt(x*y) - (x + y))/2};
+
+        \addplot3[domain=0:10, samples=2, samples y=0, red, thick] ({x}, {x}, 0);
+      
+        \end{axis}
+    \end{tikzpicture}
+    \caption{无常损失 $\delta$ 图像 \\ 其中 $a_0=b_0=1$}
+\end{figure}
+
+需要特别注意的是，并不是说只要无常损失存在， LP 就必然亏损，因为两种代币的价格按照不同的速度上涨也会给 LP 带来盈利。无常损失是一种\textbf{机会损失}，它是相较于单纯持有代币的收益而言的损失。
 
 \subsection{诈骗、假币与洗钱}
 
-在创建 ERC20 代币的时候，创建人可以给代币赋予任何代码，包括 ETH、BTC、USDT 等主流货币的代码。尽管这些伪代币的合约地址与本尊显然不同，但每年仍有不计其数的人被这些假币蒙混过关，造成不可挽回的财产损失。 Uniswap 并没有办法杜绝假币，甚至经常扮演假币流通的帮凶。
+在创建 ERC20 代币的时候，创建人可以给代币赋予任何代码，包括 ETH、BTC、USDT 等主流货币的代码。尽管这些伪代币的合约地址与本尊显然不同，但每年仍有不计其数的人被这些假币蒙混过关，造成不可挽回的财产损失。 Uniswap 并没有办法杜绝假币，甚至经常扮演假币流通的帮凶。一些假币的流动性池看似具有套利机会，实际上是资金只进不出的貔貅盘。
 
-Telegram 里经常出现诸如“低价出U”、“干净的黑U”等噱头的诈骗广告。有一些韭菜利欲熏心找上门后，狡猾的诈骗犯主动示好，自愿先将假币发送至受害者的钱包，并伪造一个流动性池来证明自己的假币是真的具有购买力的。受害者看见自己的钱包的确到账了约定数量的“USDT”，就会把真的 USDT 发送给诈骗犯，待到发现自己收到的是假币，为时晚矣！
+Telegram 里经常出现诸如“低价出U”、“干净的黑U”等噱头的诈骗广告。有一些韭菜利欲熏心找上门后，狡猾的诈骗犯主动示好，自愿先将假币发送至受害者的钱包，并伪造一个流动性池来证明自己的假币是真的具有购买力的。受害者看见自己的钱包的确到账了约定数量的“USDT”，就会把真的 USDT 发送给诈骗犯。待到发现自己收到的是假币，为时晚矣！
 
-Uniswap 是近乎完美的链上洗钱池。业内人士将干净的钱称为“白米”，将来路不正或可疑的钱称为“黑米”，而借助 Uniswap 进行“洗米”的技术已经非常成熟。一种比较常见的操作是，发行一个新的代币并创建流动性池，在初期用白米以低价买入大量代币，并逐渐用黑米和跟风韭菜的钱不断推高价格。最终白米筹码获利百倍千倍，砸盘离场使价格瞬间归零，抛弃黑米筹码和韭菜。这样一来，黑米就变成了白米。
+Uniswap 是近乎完美的链上洗钱池。业内人士将干净的钱称为“白米”，将来路不正或可疑的钱称为“黑米”，而借助 Uniswap 进行“洗米”的技术已经非常成熟。一种比较常见的操作是，发行一个新的代币并创建流动性池，在初期用白米以低价买入大量代币，并逐渐用黑米和跟风韭菜的钱不断推高价格。最终白米筹码获利百倍千倍，砸盘离场使价格瞬间归零，抛弃黑米筹码和韭菜。这样一来，黑米就洗成了白米。
 
-由于大量韭菜的参与，调查人员很难弄清白米的真实流向，因此目前对于利用 Uniswap 进行的洗钱犯罪还没有什么非常有效的追踪手段。
+由于大量韭菜的参与，调查人员很难弄清黑米的真实流向，因此目前对于利用 Uniswap 进行的洗钱犯罪还没有特别有效的追踪手段。
 
 \subsection{价格预言机失灵}
 

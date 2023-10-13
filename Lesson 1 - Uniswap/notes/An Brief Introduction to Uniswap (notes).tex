@@ -3,10 +3,11 @@
 \usepackage{tikz}
 \usepackage{amsmath}
 \usepackage{pgfplots}
+\usepackage{subcaption}
 \usetikzlibrary{angles,quotes}
 
 \title{Uniswap简明导论}
-\author{武汉大学 \\ 怀菁}
+\author{武汉大学 \\ 怀菁 \\ splendorwhite@whu.edu.cn}
 \date{\today}
 
 \begin{document}
@@ -485,9 +486,38 @@ $$
     = \sqrt{\frac{a_0b_0}{a_1b_1}} \cdot \frac{a_1^2+b_1^2}{a_0^2+b_0^2}
 \end{equation}
 
-\noindent 即代表 LP 通过提供流动性带来的收益。很显然，若 $a_1>a_0,b_1>b_0$ ，则 $r>1$ ， LP 必然获利；若 $a_1<a_0,b_1<b_0$ ，则 $r<1$ ， LP 必然亏损；若 X 的价格和 Y 的价格呈负相关，则 LP 的损益情况还需进一步讨论，此处不做展开。这一规律其实不难理解：假如 LP 存入的两种货币都相对于第三种货币急剧贬值，那么他很难靠微薄的流动性利润弥补大幅度的资产减值。
+\noindent 即代表 LP 通过提供流动性带来的收益。很显然，若 $a_1>a_0,b_1>b_0$ ，则 $r>1$ ， LP 必然获利；若 $a_1<a_0,b_1<b_0$ ，则 $r<1$ ， LP 必然亏损；若 X 的价格和 Y 的价格呈负相关，则 LP 的损益情况还需进一步讨论。这一规律其实不难理解：假如 LP 存入的两种货币都相对于第三种货币急剧贬值，那么他很难靠微薄的流动性利润弥补大幅度的资产减值。
 
-下面我们考虑 LP 不参与提供流动性，而只是简单持有代币，设其在 1 时刻的资产为 $B^* = a_1x_0+b_1y_0$ 。
+在 $a_0=b_0=1$ 时，画出 $r$ 的图像如图 9(a) 所示。函数在 $z=1$ 平面以下的部分代表亏损，在 $z=1$ 平面以上的部分代表盈利， $r$ 与 $z=1$ 的交线代表既不获利也不亏损的情况。
+
+% \begin{figure}
+%     \centering
+%     \includegraphics*[width=10cm]{r.png}
+%     \caption{$r$ 图像}
+% \end{figure}
+
+\begin{figure}
+    \begin{subfigure}{0.5\textwidth}
+        \centering
+        \includegraphics*[width=\textwidth]{r.png}
+        \caption{$r$ 图像}
+    \end{subfigure}
+    \begin{subfigure}{0.5\textwidth}
+        \centering
+        \includegraphics*[width=\textwidth]{r_.png}
+        \caption{$r^*$ 图像}
+    \end{subfigure}
+\end{figure}
+
+下面我们考虑 LP 不参与提供流动性，而只是简单持有代币的损益。设其在 1 时刻的资产为 $B^* = a_1x_0+b_1y_0$ 收益用
+
+\begin{equation}
+    r^* = \frac{B^*}{B_0} = \frac{a_1x_0+b_1y_0}{a_0x_0+b_0y_0}
+\end{equation}
+
+\noindent 来表示。在 $a_0=b_0=x_0=y_0=1$ 时，其函数图像如图 9(b) 所示。
+
+我们发现 $B_1>B^*$ 不一定成立，也就是说，相比于简单持有代币，提供流动性并不总是一个更好的选择。
 
 \subsection{诈骗、假币与洗钱}
 
@@ -513,7 +543,13 @@ Uniswap 合约的状态变量中存储有两种代币的储备量，可以通过
 
 \subsection{黑客攻击}
 
-监守自盗
+早期的去中心化交易所往往将交易所所需的全部逻辑放在一个合约中实现并部署，但缺乏经验的开发者总是会让合约的逻辑出现各种奇奇怪怪的 bug 。一部分 bug 可能导致 LP 存入流动性后无法提取收益，另一部分 bug 使得黑客可以构造某种攻击方式绕过重重验证盗取流动性池的资金，给 LP 和交易者造成重大损失。有一些经典的黑客攻击案例，其想象力之丰富、实现之精妙令人拍案叫绝，感兴趣的读者可以自行了解。
+
+然而，利用 Uniswap 漏洞的人不一定是名不见经传的黑客，也有可能是某些不怀好意的开发者。他们深谙 Uniswap 的某些漏洞或特性，在自己设计的合约中留下后门，待到投资者投入资金后用自己的另一个钱包实现攻击并获利，使自己在公众面前看起来像一个无辜的受害者。这种监守自盗的行为毫无疑问是一种犯罪，但是单用链上交易记录作为证据很难证明开发者的罪行。
+
+Uniswap V2 给出了一种更加安全的解决方案，将 LP 的资金及基础交易功能和其他衍生功能隔离开来，有效防止 LP 的资金被黑客盗取。具体地说，一个交易所由核心合约和路由合约共同组成。核心合约存放了 LP 的资金，只实现了最基础的交易逻辑，其简短的代码经过无数开发人员与公众极其严苛的审计，使得其攻击面得以最小化；而路由合约则用于实现其他复杂功能，比如添加或移除流动性、多路径交换和原生 ETH 交易。
+
+随着 Uniswap 不断升级，目前针对 Uniswap 本身的攻击变得越来越罕见， Uniswap 的改进过程也为其他 Defi 项目的安全工作提供了宝贵的经验。
 
 \end{document}
 

@@ -8,6 +8,7 @@
 \usepackage{url}
 \usetikzlibrary{angles,quotes}
 
+
 \title{Uniswap简明导论}
 \author{武汉大学 \\ 怀菁 \\ splendorwhite@whu.edu.cn}
 \date{\today}
@@ -109,7 +110,7 @@ Uniswap 是一个不断发展的交易协议。在 Uniswap V2 中，任意交易
 
 可口可乐交易所的例子非常简明，但是它的弊端十分明显——可乐的价格是不能变化的。在真正的金融市场上，资产价格应当随着供求关系的变化产生波动。
 
-我们假设有人用货币 X 和货币 Y 一起建立了一个\textbf{交易对}（Pair），记作 Y/X ，使得任何人都可以使用一种资产交易另一种资产。在这里，我们称 X 为\textbf{基准货币}（Base Currency），称 Y 为\textbf{计价货币}（Quote Currency）。
+我们假设有人用货币 X 和货币 Y 一起建立了一个\textbf{交易对}（Pair），记作 Y/X ，使得任何人都可以使用一种资产交易另一种资产。在这里，我们称 Y 为\textbf{基准货币}（Base Currency），称 X 为\textbf{计价货币}（Quote Currency）。
 
 Uniswap 为两种资产建立起一个\textbf{流动性池}（Liquidity Pool），其中储备有若干 X 和 Y。设 X 的储备数量为 $x$ ，Y 的储备数量为 $y$ ，这两个量是变量。
 
@@ -135,9 +136,9 @@ $x$ 与 $y$ 相对数量的变化反映了价格（汇率）的变化，而 $xy$
 
 结合图4，我们可以用数学语言表示，在状态 A 下
 
-$$
-p_X = \frac{y_1}{x_1} = \tan \theta
-$$
+\begin{equation}
+    p_X = \frac{y_1}{x_1} = \tan \theta
+\end{equation}
 
 \begin{figure}[htbp]
     \centering
@@ -204,11 +205,11 @@ $$
 
 \begin{equation}
 \begin{aligned}
-    \frac{\Delta x}{\Delta y} 
-    & = \frac{\Delta x}{y_0-\frac{k}{x_0+\Delta x}} \\
-    & = \frac{\Delta x (x_0+\Delta x)}{y_0 (x_0+\Delta x) - x_0y_0} \\
-    & = \frac{x_0 + \Delta x}{y_0} \\
-    & \approx \frac{x_0}{y_0} = p_X
+    \frac{\Delta y}{\Delta x} 
+    & = \frac{y_0-\frac{k}{x_0+\Delta x}}{\Delta x} \\
+    & = \frac{y_0 (x_0+\Delta x) - x_0y_0}{\Delta x (x_0+\Delta x)} \\
+    & = \frac{y_0}{x_0 + \Delta x} \\
+    & \approx \frac{y_0}{x_0} = p_X
 \end{aligned}
 \end{equation}
 
@@ -647,6 +648,7 @@ V3 及以前的版本允许使用工厂合约对一个本质相同交易对创�
 本文讲述了 Uniswap 的基本原理、发展历程、风险因素和新特性。但受篇幅和本人知识水平所限，还有很多内容没能涵盖。Uniswap 的社区治理、Uniswap Labs 公司、 LP 做市收益的实证分析都是值得深入研究的内容。作为 DEX 中当之无愧的佼佼者， Uniswap 值得我们持续关注并认真学习。
 
 \section*{思考题}
+\markboth{}{}
 
 \begin{enumerate}
     \item 了解了 Uniswap 的利弊之后，你是更愿意选择中心化交易所还是去中心化交易所？为什么？

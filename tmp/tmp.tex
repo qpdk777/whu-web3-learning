@@ -1,0 +1,82 @@
+\documentclass{article}
+\usepackage{ctex}
+
+\title{金融工程第三次作业}
+\author{怀菁}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section*{第 2 题}
+
+协议签订后，利率互换的价格是其价值。
+
+协议签订时，利率互换的互换定价是使其初始价值为 0 时的固定利率。
+
+\section*{第 3 题}
+
+设本金为 100 美元。
+
+\begin{equation}
+    \frac{5.4}{2} \times\mathrm{e}^{-5\%\times0.5} + \frac{5.4}{2} \times\mathrm{e}^{-5\%\times1} + \frac{5.4}{2} \times\mathrm{e}^{-5\%\times1.5} + (100+\frac{5.4}{2}) \times\mathrm{e}^{-r_2\times2} = 100
+\end{equation}
+
+可得 $r_2=5.342\%$
+
+\begin{equation}
+    \frac{5.5}{2} \times\mathrm{e}^{-5\%\times0.5} + \frac{5.5}{2} \times\mathrm{e}^{-5\%\times1} + \frac{5.5}{2} \times\mathrm{e}^{-5\%\times1.5} + \frac{5.5}{2} \times\mathrm{e}^{-5.342\%\times2} + (100+\frac{5.5}{2}) \times\mathrm{e}^{-r_{2.5}\times2} = 100
+\end{equation}
+
+可得 $r_{2.5}=5.442\%$
+
+\begin{equation}
+    \frac{5.6}{2} \times\mathrm{e}^{-5\%\times0.5} + \frac{5.6}{2} \times\mathrm{e}^{-5\%\times1} + \frac{5.6}{2} \times\mathrm{e}^{-5\%\times1.5} + \frac{5.6}{2} \times\mathrm{e}^{-5.342\%\times2} + \frac{5.6}{2} \times\mathrm{e}^{-5.442\%\times2.5} + (100+\frac{5.6}{2}) \times\mathrm{e}^{-r_{3}\times3} = 100
+\end{equation}
+
+可得 $r_3=5.544\%$
+
+\section*{第 4 题}
+
+美元利息 = $1000\times8\%=80$ 万美元
+
+日元利息 = $120000\times5\%=6000$ 万日元
+
+\subsection*{债券组合}
+
+\begin{equation}
+    B_D = 80\times \mathrm{e}^{-9\%\times1} + 80\times \mathrm{e}^{-9\%\times2} + 1080\times \mathrm{e}^{-9\%\times3} = 964.4
+\end{equation}
+
+\begin{equation}
+    B_F = 6000\times \mathrm{e}^{-4\%\times1} + 6000\times \mathrm{e}^{-4\%\times2} + 126000\times \mathrm{e}^{-4\%\times3} = 123055
+\end{equation}
+
+现值 = $\frac{123055}{110}-964.4=154.282$
+
+\subsection*{远期外汇组合}
+
+远期汇率 = $1/110 \times \mathrm{e}^{(9\%-4\%)\times\{1,2,3\}} = \{0.009557,0.010047,0.010562\}$
+
+利息远期价值 = $(80 - 6000\times\{0.009557,0.010047,0.010562\}) \mathrm{e}^{-9\%\times\{1,2,3\}} = \{20.71,16.47,12.69\}$
+
+本金远期价值 = $(1000 - 120000\times0.010562) \mathrm{e}^{-9\%\times3} = 210.46$
+
+价值 $201.46-12.69-16.47-12.69=154.282$ 
+
+\section*{第 5 题}
+
+外币 $B_F = 30\times(\mathrm{e}^{-3\%\times\{1,2,3,4,5,6\}}) + 1030\times \mathrm{e}^{-3\%\times6} = 1162.59564$ 
+
+本币 $B_D = 56\times(\mathrm{e}^{-8\%\times\{1,2,3,4,5,6\}}) + 756\times \mathrm{e}^{-8\%\times6} = 722.67724$
+
+损失 = $SB_F-B_D = 1162.59564\times0.8-722.67724=206.599272$
+
+\section*{第 6 题}
+
+信用风险：交易对手违约的风险，如果涉及本金交换，那么其风险大于仅交换利差的风险。
+
+市场风险：利率风险和汇率风险，即利率或汇率朝着不利于交易者的方向变动，导致交易者付出更多现金流的风险。
+
+\end{document}

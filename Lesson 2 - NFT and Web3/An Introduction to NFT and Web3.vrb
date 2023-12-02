@@ -1,0 +1,21 @@
+\frametitle{从简单转账到 NFT}
+
+    \begin{itemize}
+        \item 最开始的区块链（也就是比特币）只支持简单转账
+        \item 但是真实的经济生活中，人们的经济活动往往非常复杂，涉及到触发条件、交易流程、权益分配等问题
+        \item 人们希望将这些内容写成代码，编译为可执行程序，然后在区块链上执行这些程序
+
+    \end{itemize}
+
+    \begin{lstlisting}
+        if time >= 2023-12-01:
+            MyAccount.balance += 10
+            YourAccount.balance -= 10
+    \end{lstlisting}
+
+    \begin{itemize}
+        \item 这就是智能合约（Smart Contract）。你可以认为“公共账本”升级为了“公共电脑”，而智能合约就在一台所有人参与建设、参与监管并认可其真实性的公共电脑上运行。
+        \item NFT 的铸造、转移、买卖、销毁、收益分配都是由智能合约实现
+        \item ERC-721 协议规定了一个 NFT 应当具有的基本功能，以太坊上 NFT 项目的开发人员都会选择遵守这份标准
+    \end{itemize}
+
